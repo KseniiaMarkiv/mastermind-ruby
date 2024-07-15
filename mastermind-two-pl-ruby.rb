@@ -33,20 +33,40 @@ end
 @highlight_hint = red_color('hints')
 
 # game conditions
-
 def game_conditions
   puts red_color("#{@aim_symbol} THE MAIN GOAL #{@aim_symbol} is you have 12 turns to guess 4 colors.")
   puts "You have only 10 various colors: #{@sequence_colors}"
   puts "Game will give you #{@highlight_hint} of what color you guessed."
 end
 
+# assign color positions to both CREATOR
+def creator_assign
+  puts yellow_color('CREATOR writes, pls, what colors do you have in mind? (4 colors)')
+    array_colors = []
+
+    until array_colors.count == 4
+      colors = gets.downcase.split
+      if colors.count < 4
+        puts red_color("Oops! Looks like you're missing some colors. Please enter exactly 4 colors. Let's try again! #{@rainbow_symbol}")
+      elsif colors.count > 4
+        puts red_color("Whoa there! You've entered too many colors. Please enter exactly 4 colors. #{@rainbow_symbol}")
+      else
+        array_colors = colors
+      end
+    end
+    puts green_color("Your colors are #{array_colors}")
+    array_colors
+end
+
 # initialize board for storing moves and colors
 def initialize_board
-  Array.new(12, Array.new(4, ''))
+  board = Array.new(12, Array.new(4, ''))
+  board[0] = creator_assign
+  board
 end
 
 def choose_position 
-  puts 'Which one do you choose: be Creator or be Guesser?'
+  puts blue_color('Which one do you choose: be Creator/c or be Guesser/g?')
   gets.chomp.upcase
 end
 
@@ -76,21 +96,82 @@ def whos_action
   elsif player == 'GUESSER'
     guesser_assign
   else
-    puts 'Hello'
+    puts red_color('Invalid input. Which one do you choose: be Creator/c or be Guesser/g?')
   end
 end
 
-def creator_assign
-  puts puts 'Write, what colors do you have in mind? (4 colors)'
-  colors = gets.chomp.split(' ').map(&:downcase)
-  board = initialize_board
-  board[0] = colors
-  p board
+# assign color positions to GUESSER
+def guesser_assign
+  puts yellow_color('GUESSER writes, pls, what colors do you have in mind (4 colors)?')
+  array_colors = []
+
+  until array_colors.count == 4
+    colors = gets.downcase.split
+    if colors.count < 4
+      puts red_color("Oops! Looks like you're missing some colors. Please enter exactly 4 colors. Let's try again! #{@rainbow_symbol}")
+    elsif colors.count > 4
+      puts red_color("Whoa there! You've entered too many colors. Please enter exactly 4 colors. #{@rainbow_symbol}")
+    else
+      array_colors = colors
+    end
+  end
+  puts green_color("Your colors are #{array_colors}")
+  array_colors
 end
 
-def guesser_assign
-  p 'assign colors as guesser'
+# assign each turn in board
+def store_colors(board, colors, turn)
+  # Assign colors to Array
+  board[turn] = colors
+  board
 end
+
+# Check if guessed colors are correct
+def correct_guess?(board, turn)
+  board[turn] == board[0]
+end
+
+# Provide feedback on the guessed colors
+def feedback(board, turn)
+  correct_positions = board[turn].each_index.select { |i| board[turn][i] == board[0][i] }
+  correct_positions.map! { |index| "##{index + 1}" }
+  correct_positions
+end
+
+# FIXME added play again ask function
+
+def play_game
+  game_conditions
+  board = initialize_board
+  guess_turn = 1
+
+  loop do
+    puts
+    puts "Turn #{guess_turn}:"
+    save_colors = guesser_assign
+    store_colors(board, save_colors, guess_turn)
+    
+    if correct_guess?(board, guess_turn)
+      puts green_color("Congrats, you are the winner and you only needed #{guess_turn} moves #{@aim_symbol}")
+      break
+    else
+      correct_positions = feedback(board, guess_turn)
+      if correct_positions.empty?
+        puts red_color('Better luck next time! Keep guessing...')
+      else
+        puts yellow_color("You were guessing color/s by #{correct_positions}")
+      end
+      
+      guess_turn += 1
+      if guess_turn > 12
+        puts 'Out of turns! Game over.'
+        break
+      end
+    end
+  end
+end
+
+
 
 # in this way you can check your implemented program
-whos_action
+play_game
