@@ -70,4 +70,25 @@ def current_players(position)
   players[position][:full_name]
 end
 
-current_players choose_position 
+def whos_action
+  player = current_players(choose_position)
+  p player
+  if player == 'CREATOR'
+    creator_assign
+  elsif player == 'GUESSER'
+    guesser_assign
+  else
+    puts 'Hello'
+  end
+end
+
+def creator_assign
+  p 'assign colors as creator'
+end
+
+def guesser_assign
+  p 'assign colors as guesser'
+end
+
+# in this way you can check your implemented program
+whos_action
