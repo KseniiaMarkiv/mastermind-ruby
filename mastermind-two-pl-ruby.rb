@@ -83,8 +83,6 @@ def current_players(position)
     position = gets.chomp.upcase
   end
 
-  chosen_player = players[position]
-  puts green_color("Congrats, you have chosen to be the #{chosen_player[:full_name]}")
   players[position][:full_name]
 end
 
@@ -92,9 +90,9 @@ def whos_action
   player = current_players(choose_position)
 
   if player == 'CREATOR'
-    creator_assign
+    puts green_color('Congrats, you have chosen to be the CREATOR')
   elsif player == 'GUESSER'
-    guesser_assign
+    puts green_color('Congrats, you have chosen to be the GUESSER')
   else
     puts red_color('Invalid input. Which one do you choose: be Creator/c or be Guesser/g?')
   end
@@ -142,6 +140,7 @@ end
 
 def play_game
   game_conditions
+  whos_action
   board = initialize_board
   guess_turn = 1
 
