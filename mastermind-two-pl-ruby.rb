@@ -136,8 +136,6 @@ def feedback(board, turn)
   correct_positions
 end
 
-# FIXME added play again ask function
-
 def play_game
   game_conditions
   whos_action
@@ -164,13 +162,30 @@ def play_game
       guess_turn += 1
       if guess_turn > 12
         puts 'Out of turns! Game over.'
+        play_again
         break
       end
     end
   end
 end
 
+def play_again
+  loop do
+    puts 'Play again?'
+    answer = gets.chomp.downcase
 
+    case answer
+    when 'yes', 'y'
+      play_game
+      break
+    when 'no', 'n'
+      puts green_color("Thank you for playing! #{@cool_emoji}")
+      break
+    else  
+      puts red_color("Invalid choice. Please choose yes/y or no/n #{@mushroom_emoji}")
+    end  
+  end
+end
 
 # in this way you can check your implemented program
 play_game
