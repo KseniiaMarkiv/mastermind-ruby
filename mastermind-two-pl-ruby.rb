@@ -42,9 +42,7 @@ end
 
 # initialize board for storing moves and colors
 def initialize_board
-  board = Array.new(12, Array.new(4, ''))
-  board[0] = %w(green yellow red blue)
-  board
+  Array.new(12, Array.new(4, ''))
 end
 
 def choose_position 
@@ -72,7 +70,7 @@ end
 
 def whos_action
   player = current_players(choose_position)
-  p player
+
   if player == 'CREATOR'
     creator_assign
   elsif player == 'GUESSER'
@@ -83,7 +81,11 @@ def whos_action
 end
 
 def creator_assign
-  p 'assign colors as creator'
+  puts puts 'Write, what colors do you have in mind? (4 colors)'
+  colors = gets.chomp.split(' ').map(&:downcase)
+  board = initialize_board
+  board[0] = colors
+  p board
 end
 
 def guesser_assign
