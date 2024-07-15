@@ -46,3 +46,28 @@ def initialize_board
   board[0] = %w(green yellow red blue)
   board
 end
+
+def choose_position 
+  puts 'Which one do you choose: be Creator or be Guesser?'
+  gets.chomp.upcase
+end
+
+def current_players(position)
+  players = {
+    'GUESSER' => { full_name: 'GUESSER', short_name: 'G' },
+    'G' => { full_name: 'GUESSER', short_name: 'G' },
+    'CREATOR' => { full_name: 'CREATOR', short_name: 'C' },
+    'C' => { full_name: 'CREATOR', short_name: 'C' }
+  }
+
+  until players.key?(position)
+    puts red_color("Invalid input. Please enter a valid string of guesser or g, creator or c \u{1f344}")
+    position = gets.chomp.upcase
+  end
+
+  chosen_player = players[position]
+  puts green_color("Congrats, you have chosen to be the #{chosen_player[:full_name]}")
+  players[position][:full_name]
+end
+
+current_players choose_position 
