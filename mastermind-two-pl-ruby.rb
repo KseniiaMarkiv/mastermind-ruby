@@ -29,7 +29,7 @@ end
 @aim_symbol = "\u{1F3AF}"
 
 # variables
-@sequence_colors = red_color('Red, Blue, Green, Yellow, Black, White, Gray, Orange, Purple, Pink')
+@sequence_colors = red_color('Red, Blue, Green, Yellow, Black, White, Gray, Orange, Purple, Pink'.downcase)
 @highlight_hint = red_color('hints')
 
 # game conditions
@@ -47,11 +47,15 @@ def get_colors(role)
 
   until array_colors.count == 4 && array_colors.all? { |color| color.length.between?(3, 6) }
     colors = gets.downcase.split
-    if colors.any? { |color| !color.length.between?(3, 6) }
+    if colors.any? { |color| !@sequence_colors.include?(color) }
+      puts red_color("Invalid color entered. Let's try again! #{@rainbow_symbol}")
+      puts gray_color("Don't forget only #{@sequence_colors}")
+    elsif colors.any? { |color| !color.length.between?(3, 6) }
       puts red_color("Each color should be between 3 and 6 characters long. Let's try again! #{@rainbow_symbol}")
       puts gray_color("Don't forget only #{@sequence_colors}")
     elsif colors.count != 4
       puts red_color("You need to enter exactly 4 colors. Let's try again! #{@rainbow_symbol}")
+      puts gray_color("Don't forget only #{@sequence_colors}")
     else
       array_colors = colors
     end
