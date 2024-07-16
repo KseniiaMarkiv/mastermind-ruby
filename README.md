@@ -1,5 +1,8 @@
 # Project: Mastermind - was performed only on Ruby
 
+#### Next step: 
+#### $${\color{blue} \space is \space divide  \space a \space project \space by \space rules \space OOP, \space it's \space class, \space module \space and \space separate \space files}$$
+
 _it’s a game where you have to guess your opponent’s secret code within a certain number of turns (like hangman with colored pegs). Each turn you get some feedback about how good your guess was – whether it was exactly correct or just the correct color but in the wrong space._
 
 
