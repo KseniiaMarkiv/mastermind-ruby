@@ -40,24 +40,36 @@ def game_conditions
   puts
 end
 
-# assign color positions to both CREATOR
-def creator_assign
-  puts yellow_color('CREATOR writes, pls, what colors do you have in mind? (4 colors)')
-    array_colors = []
+# assign color positions to both CREATOR and GUESSER
+def get_colors(role)
+  puts yellow_color("#{role.upcase} writes, pls, what colors do you have in mind (4 colors, each between 3 and 6 characters)?")
+  array_colors = []
 
-    until array_colors.count == 4 && array_colors.all? { |color| color.length.between?(3, 6) }
-      colors = gets.downcase.split
-      if colors.any? { |color| !color.length.between?(3, 6) }
-        puts red_color("Each color should be between 3 and 6 characters long. Let's try again! #{@rainbow_symbol}")
-        puts gray_color("Don't forget only #{@sequence_colors}")
-      elsif colors.count != 4
-        puts red_color("You need to enter exactly 4 colors. Let's try again! #{@rainbow_symbol}")
-      else
-        array_colors = colors
-      end
+  until array_colors.count == 4 && array_colors.all? { |color| color.length.between?(3, 6) }
+    colors = gets.downcase.split
+    if colors.any? { |color| !color.length.between?(3, 6) }
+      puts red_color("Each color should be between 3 and 6 characters long. Let's try again! #{@rainbow_symbol}")
+      puts gray_color("Don't forget only #{@sequence_colors}")
+    elsif colors.count != 4
+      puts red_color("You need to enter exactly 4 colors. Let's try again! #{@rainbow_symbol}")
+    else
+      array_colors = colors
     end
-    array_colors
+  end
+
+  array_colors
 end
+
+def creator_assign
+  array_colors = get_colors('CREATOR')
+end
+
+def guesser_assign
+  array_colors = get_colors('GUESSER')
+  puts green_color("Your colors are #{array_colors}")
+  array_colors
+end
+
 
 # initialize board for storing moves and colors
 def initialize_board
@@ -97,27 +109,6 @@ def whos_action
   else
     puts red_color('Invalid input. Which one do you choose: be Creator/c or be Guesser/g?')
   end
-end
-
-# assign color positions to GUESSER
-def guesser_assign
-  puts yellow_color('GUESSER writes, pls, what colors do you have in mind (4 colors)?')
-  array_colors = []
-
-  until array_colors.count == 4 && array_colors.all? { |color| color.length.between?(3, 6) }
-    colors = gets.downcase.split
-    if colors.any? { |color| !color.length.between?(3, 6) }
-      puts red_color("Each color should be between 3 and 6 characters long. Let's try again! #{@rainbow_symbol}")
-      puts gray_color("Don't forget only #{@sequence_colors}")
-      puts
-    elsif colors.count != 4
-      puts red_color("You need to enter exactly 4 colors. Let's try again! #{@rainbow_symbol}")
-    else
-      array_colors = colors
-    end
-  end
-  puts green_color("Your colors are #{array_colors}")
-  array_colors
 end
 
 # assign each turn in board
@@ -193,7 +184,3 @@ end
 # in this way you can check your implemented program
 play_game
 
-=begin
-I need to do:
-  - DRY methods
-=end
