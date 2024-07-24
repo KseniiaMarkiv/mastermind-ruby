@@ -1,7 +1,8 @@
 # Project: Mastermind - was performed only on Ruby
 
-#### Next step: 
-#### $${\color{blue} \space is \space divide  \space a \space project \space by \space rules \space OOP, \space it's \space class, \space module \space and \space separate \space files}$$
+
+#### Next step was performed: 
+#### $${\color{gray} \space the \space divided \space project \space by \space OOP \space rules, \space using \space classes, \space modules, \space and \space separate \space files \space in \space oop \space branch}$$  <br>  [![](https://img.shields.io/badge/Click_me_&#10138;-brightgreen?style=for-the-badge)](https://github.com/KseniiaMarkiv/mastermind-ruby/tree/oop)
 
 _it’s a game where you have to guess your opponent’s secret code within a certain number of turns (like hangman with colored pegs). Each turn you get some feedback about how good your guess was – whether it was exactly correct or just the correct color but in the wrong space._
 
