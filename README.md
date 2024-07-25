@@ -22,6 +22,7 @@ Welcome to the Color Guessing Game! This interactive game lets players choose to
 - [Features](#features)
 - [Example](#example)
 - [Credits](#credits)
+- [Refactoring process](#refactoring-process)
 
 ## Installation
 
@@ -76,3 +77,6 @@ Here is a snippet of how the game might look during play:
 
 This game was created using Ruby and the `colorize` gem. Special thanks to the developers of these tools for making this project possible.
 
+## Refactoring process
+
+[Link of details about the refactoring process](https://github.com/KseniiaMarkiv/mastermind-ruby/tree/oop?tab=readme-ov-file#refactoring-process)
