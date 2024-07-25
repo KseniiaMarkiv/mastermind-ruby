@@ -21,4 +21,12 @@ def gray_color(string)
   string.colorize(:gray)
 end
 
+# all constants of symbols
+CELEBRATION_SYMBOL = "\u{1F389}"
+RAINBOW_SYMBOL = "\u{1F308}"
+COOL_EMOJI = "\u{1F60E}"
+MUSHROOM_EMOJI = "\u{1F344}"
+AIM_SYMBOL = "\u{1F3AF}"
 
+SEQUENCE_COLORS = red_color('Red, Blue, Green, Yellow, Black, White, Gray, Orange, Purple, Pink'.downcase)
+HIGHLIGHT_HINT = red_color('hints')
