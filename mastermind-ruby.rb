@@ -116,3 +116,24 @@ def play_game
   end
 end
 
+# added play again ask method
+def play_again
+  loop do
+    puts 'Play again?'
+    answer = gets.chomp.downcase
+
+    case answer
+    when 'yes', 'y'
+      play_game
+      break
+    when 'no', 'n'
+      puts green_color("Thank you for playing! #{COOL_EMOJI}")
+      break
+    else  
+      puts red_color("Invalid choice. Please choose yes/y or no/n #{MUSHROOM_EMOJI}")
+    end  
+  end
+end
+
+# Start the game
+play_game
