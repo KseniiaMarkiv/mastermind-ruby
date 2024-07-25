@@ -45,3 +45,29 @@ def initialize_board
   board
 end
 
+# USE IN FINAL METHOD current_players(choose_position)
+def choose_colors
+  puts blue_color('Write, what colors do you have in mind (4 colors)?')
+  array_colors = []
+
+  until array_colors.count == 4
+    colors = gets.downcase.split
+    if colors.count < 4
+      puts red_color("Oops! Looks like you're missing some colors. Please enter exactly 4 colors. Let's try again! #{RAINBOW_SYMBOL}")
+    elsif colors.count > 4
+      puts red_color("Whoa there! You've entered too many colors. Please enter exactly 4 colors. #{RAINBOW_SYMBOL}")
+    else
+      array_colors = colors
+    end
+  end
+  puts green_color("Your colors are #{array_colors}")
+  array_colors
+end
+
+# assign each turn in board
+def store_colors(board, colors, turn)
+  # Assign colors to Array
+  board[turn] = colors
+  board
+end
+
