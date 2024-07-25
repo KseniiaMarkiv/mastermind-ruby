@@ -71,3 +71,48 @@ def store_colors(board, colors, turn)
   board
 end
 
+# Check if guessed colors are correct
+def correct_guess?(board, turn)
+  board[turn] == board[0]
+end
+
+# Provide feedback on the guessed colors
+def feedback(board, turn)
+  correct_positions = board[turn].each_index.select { |i| board[turn][i] == board[0][i] }
+  correct_positions.map! { |index| "##{index + 1}" }
+  correct_positions
+end
+
+#  added play function
+def play_game
+  game_conditions
+  board = initialize_board
+  guess_turn = 1
+
+  loop do
+    puts
+    puts "Turn #{guess_turn}:"
+    save_colors = choose_colors
+    store_colors(board, save_colors, guess_turn)
+    
+    if correct_guess?(board, guess_turn)
+      puts green_color("Congrats, you are the winner and you only needed #{guess_turn} moves #{AIM_SYMBOL}")
+      break
+    else
+      correct_positions = feedback(board, guess_turn)
+      if correct_positions.empty?
+        puts red_color('Better luck next time! Keep guessing...')
+      else
+        puts yellow_color("You were guessing color/s by #{correct_positions}")
+      end
+      
+      guess_turn += 1
+      if guess_turn > 12
+        puts 'Out of turns! Game over.'
+        play_again
+        break
+      end
+    end
+  end
+end
+
