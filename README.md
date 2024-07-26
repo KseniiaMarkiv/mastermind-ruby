@@ -31,11 +31,16 @@ To run this game, you need to have Ruby installed on your machine along with the
 
 3. **Clone the repository**:
     ```sh
-    git clone <repository-url>
-    cd <repository-directory>
+    git clone https://github.com/KseniiaMarkiv/mastermind-ruby.git
+    cd mastermind-ruby
     ```
 
-4. **Run the game**:
+4. **Switch branch to oop**
+   ```sh
+   git checkout oop
+   ```
+
+5. **Run the game**:
     ```sh
     ruby main.rb
     ```
